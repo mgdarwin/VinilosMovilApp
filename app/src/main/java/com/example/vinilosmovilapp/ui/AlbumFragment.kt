@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinilosmovilapp.R
+import com.example.vinilosmovilapp.databinding.ActivityMainBinding
 import com.example.vinilosmovilapp.databinding.AlbumFragmentBinding
 import com.example.vinilosmovilapp.models.Album
 import com.example.vinilosmovilapp.ui.adapters.AlbumsAdapter
@@ -22,9 +23,11 @@ class AlbumFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewModel: AlbumViewModel
     private var viewModelAdapter: AlbumsAdapter? = null
+    private var _mainBinding: ActivityMainBinding? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = AlbumFragmentBinding.inflate(inflater, container, false)

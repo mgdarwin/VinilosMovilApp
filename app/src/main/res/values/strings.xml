@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Vinils_Mobile</string>
     <string name="title_albums">Albums</string>
+    <string name="description_img_photo">Album Photo</string>
 
     <string name="default_text">Haga clic en el botón para cargar información</string>
     <string name="post_text">Haga clic en el botón para crear un dato</string>

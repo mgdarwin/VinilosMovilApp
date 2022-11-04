@@ -10,10 +10,6 @@ import com.example.vinilosmovilapp.R
 import com.example.vinilosmovilapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    //lateinit var volleyBroker: VolleyBroker
-
-    //@SuppressLint("SetTextI18n")
-
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         // Make sure actions in the ActionBar get propagated to the NavController
         Log.d("act", navController.toString())
-        setSupportActionBar(findViewById(R.id.my_toolbar))
+        //setSupportActionBar(findViewById(R.id.my_toolbar))
         setupActionBarWithNavController(navController)
     }
 

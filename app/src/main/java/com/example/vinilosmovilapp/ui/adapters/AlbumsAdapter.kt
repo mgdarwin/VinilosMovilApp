@@ -1,6 +1,7 @@
 package com.example.vinilosmovilapp.ui.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
@@ -13,10 +14,10 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.vinilosmovilapp.R
 import com.example.vinilosmovilapp.databinding.AlbumItemBinding
 import com.example.vinilosmovilapp.models.Album
+import com.example.vinilosmovilapp.ui.AlbumFragment
+import com.example.vinilosmovilapp.ui.AlbumFragmentDirections
 
 class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
-
-    private lateinit var mContext: Context
 
     // Allows to obtain references of the visual components (views) of each element of the list
     class AlbumViewHolder(val viewDataBinding: AlbumItemBinding) :
@@ -33,6 +34,8 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
             // Notify any registered observers that the data set has changed.
             notifyDataSetChanged()
         }
+
+    private lateinit var mContext: Context
 
     // Create new views (invoked by the layout manager)
     // Inflates the layout (xml file) that represents our elements, and returns an instance of the ViewHolder class that we defined before
@@ -51,14 +54,13 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
             it.album = albums[position]
         }
 
-        /*
         holder.viewDataBinding.root.setOnClickListener {
-            val action = AlbumFragmentDirections.actionAlbumListFragmentToAlbumDetailFragment(albums[position].albumId)
+            val action = AlbumFragmentDirections.actionAlbumFragmentToAlbumDetailFragment (albums[position].albumId)
             // Navigate using that action
+            Log.d("indice", albums[position].albumId.toString())
             holder.viewDataBinding.root.findNavController().navigate(action)
         }
 
-         */
         val album: Album = albums.get(position)
         holder.viewDataBinding.also {
             it.album = albums[position]

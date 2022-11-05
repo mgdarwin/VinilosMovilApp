@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
@@ -8,12 +9,19 @@
     <fragment
         android:id="@+id/albumFragment"
         android:name="com.example.vinilosmovilapp.ui.AlbumFragment"
-        android:label="album_fragment"
+        android:label="Album List"
         tools:layout="@layout/album_fragment" >
-        <!--
         <action
-            android:id="@+id/action_albumFragment_to_commentFragment"
-            app:destination="@id/commentFragment" />
-        -->
+            android:id="@+id/action_albumFragment_to_albumDetailFragment"
+            app:destination="@id/albumDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/albumDetailFragment"
+        android:name="com.example.vinilosmovilapp.ui.AlbumDetailFragment"
+        android:label="Album Detail"
+        tools:layout="@layout/album_detail_item" >
+        <argument
+            android:name="albumId"
+            app:argType="integer" />
     </fragment>
 </navigation>

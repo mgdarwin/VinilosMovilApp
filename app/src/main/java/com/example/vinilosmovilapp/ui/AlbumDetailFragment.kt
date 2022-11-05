@@ -1,6 +1,7 @@
 package com.example.vinilosmovilapp.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,37 +9,38 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinilosmovilapp.R
-import com.example.vinilosmovilapp.databinding.ActivityMainBinding
-import com.example.vinilosmovilapp.databinding.AlbumFragmentBinding
+import com.example.vinilosmovilapp.databinding.AlbumDetailFragmentBinding
 import com.example.vinilosmovilapp.models.Album
-import com.example.vinilosmovilapp.ui.adapters.AlbumsAdapter
-import com.example.vinilosmovilapp.viewmodels.AlbumViewModel
+import com.example.vinilosmovilapp.ui.adapters.AlbumDetailAdapter
+import com.example.vinilosmovilapp.viewmodels.AlbumDetailViewModel
 
-class AlbumFragment : Fragment() {
-    private var _binding: AlbumFragmentBinding? = null
+class AlbumDetailFragment : Fragment() {
+    private var _binding: AlbumDetailFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
-    private lateinit var viewModel: AlbumViewModel
-    private var viewModelAdapter: AlbumsAdapter? = null
-    private var _mainBinding: ActivityMainBinding? = null
-    private val mainBinding get() = _mainBinding!!
+    private lateinit var viewModel: AlbumDetailViewModel
+    private var viewModelAdapter: AlbumDetailAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = AlbumFragmentBinding.inflate(inflater, container, false)
+        _binding = AlbumDetailFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
-        viewModelAdapter = AlbumsAdapter()
+        viewModelAdapter = AlbumDetailAdapter()
         return view
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        recyclerView = binding.albumsRv
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
+        recyclerView = binding.albumDetailRv
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = viewModelAdapter
     }
@@ -48,8 +50,11 @@ class AlbumFragment : Fragment() {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
-        activity.actionBar?.title = getString(R.string.title_albums)
-        viewModel = ViewModelProvider(this, AlbumViewModel.Factory(activity.application)).get(AlbumViewModel::class.java)
+        activity.actionBar?.title = getString(R.string.title_album_detail)
+        val args: AlbumDetailFragmentArgs by navArgs()
+        Log.d("Args", args.albumId.toString())
+        viewModel = ViewModelProvider(this, AlbumDetailViewModel.Factory(activity.application, args.albumId)).get(
+            AlbumDetailViewModel::class.java)
         viewModel.albums.observe(viewLifecycleOwner, Observer<List<Album>> {
             it.apply {
                 viewModelAdapter!!.albums = this
@@ -59,6 +64,7 @@ class AlbumFragment : Fragment() {
             if (isNetworkError) onNetworkError()
         })
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

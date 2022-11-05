@@ -11,6 +11,9 @@ import com.android.volley.toolbox.Volley
 import com.example.vinilosmovilapp.models.Album
 import org.json.JSONArray
 import org.json.JSONObject
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 
 class NetworkServiceAdapter constructor(context : Context ) {
 
@@ -57,6 +60,30 @@ class NetworkServiceAdapter constructor(context : Context ) {
                 {
                     onError(it)
                 }
+            )
+        )
+    }
+
+    fun getAlbum(albumId:Int, onComplete: (resp: List<Album>) -> Unit, onError: (error: VolleyError) -> Unit) {
+        requestQueue.add(
+            requestQueue.add(getRequest("albums/$albumId",
+                { response ->
+                    val resp = JSONObject(response)
+                    val list = mutableListOf<Album>()
+                    list.add(0, Album(
+                        albumId = resp.getInt("id"),
+                        name = resp.getString("name"),
+                        cover = resp.getString("cover"),
+                        recordLabel = resp.getString("recordLabel"),
+                        releaseDate = resp.getString("releaseDate"),
+                        genre = resp.getString("genre"),
+                        description = resp.getString("description")))
+                    onComplete(list)
+                },
+                {
+                    onError(it)
+                }
+            )
             )
         )
     }

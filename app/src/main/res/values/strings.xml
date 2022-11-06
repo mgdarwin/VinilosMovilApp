@@ -8,6 +8,7 @@
     <string name="album_description_placeholder">Album description</string>
     <string name="album_name_placeholder">Album Name</string>
     <string name="title_album_detail">Album Detail</string>
+    <string name="icon_layout">Icon</string>
 
     <string name="default_text">Haga clic en el botón para cargar información</string>
     <string name="post_text">Haga clic en el botón para crear un dato</string>

@@ -4,4 +4,9 @@
     <item android:id="@+id/action_switch_layout"
         android:title="@string/action_switch_layout"
         app:showAsAction="always" />
+    <item android:id="@+id/icon_layout"
+        android:icon="@mipmap/icon"
+        android:title="@string/icon_layout"
+        android:orderInCategory="1"
+        app:showAsAction="always" />
 </menu>

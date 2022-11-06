@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable name="album" type="com.example.vinilosmovilapp.models.Album"/>
+    </data>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardDetailAlbum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        tools:context=".ui.AlbumDetailFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/common_padding_default">
+
+            <ImageView
+                android:id="@+id/albumDetailCover"
+                android:layout_width="match_parent"
+                android:layout_height="350sp"
+                android:contentDescription="@string/content_description_media"
+                android:scaleType="centerCrop"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:elevation="6dp"
+                android:padding="16dp">
+
+                <!-- Title, secondary and supporting text -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{album.name}"
+                    android:contentDescription="@{album.name}"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    tools:text="Album Tittle"
+                    android:id="@+id/albumTittle"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{`Genre | ` + album.genre}"
+                    android:contentDescription="@{`Genre | ` + album.genre}"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="@color/black"
+                    tools:text="Genre" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{`Record Label | ` + album.recordLabel}"
+                    android:contentDescription="@{`Record Label | ` + album.recordLabel}"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="@color/black"
+                    tools:text="Record label" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{`Release Date | ` + album.releaseDate}"
+                    android:contentDescription="@{`Release Date | ` + album.releaseDate}"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="@color/black"
+                    tools:text="Release Date"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@{album.description}"
+                    android:contentDescription="@string/album_name_placeholder"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="@color/black"
+                    tools:text="Description" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/albumFragment"
         android:name="com.example.vinilosmovilapp.ui.AlbumFragment"
-        android:label="Album List"
+        android:label="Albums List"
         tools:layout="@layout/album_fragment" >
         <action
             android:id="@+id/action_albumFragment_to_albumDetailFragment"
@@ -24,4 +24,11 @@
             android:name="albumId"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/collectorFragment"
+        android:name="com.example.vinilosmovilapp.ui.CollectorFragment"
+        android:label="Collectors List"
+        tools:layout="@layout/collector_fragment" >
+    </fragment>
+
 </navigation>

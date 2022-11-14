@@ -88,7 +88,7 @@ class NetworkServiceAdapter constructor(context : Context ) {
             )
         )
     }
-    fun getCollectors(onComplete: (resp: List<Collector>) -> Unit, onError: (error: VolleyError) -> Unit) {
+    suspend fun getCollectors() = suspendCoroutine<List<Collector>> { cont->
         requestQueue.add(
             getRequest("collectors",
                 { response ->
@@ -106,10 +106,10 @@ class NetworkServiceAdapter constructor(context : Context ) {
                             )
                         )
                     }
-                    onComplete(list)
-                },
+                    cont.resume(list)
+                 },
                 {
-                    onError(it)
+                    cont.resumeWithException(it)
                 }
             )
         )

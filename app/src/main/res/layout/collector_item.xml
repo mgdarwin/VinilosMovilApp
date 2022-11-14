@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="collector" type="com.example.vinilosmovilapp.models.Collector"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_padding_min"
+            android:layout_marginStart="@dimen/common_padding_min"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/stroke_color"
+            app:strokeWidth="1dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/collectorImg"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:contentDescription="@string/description_img_photo"
+                    android:background="@android:color/darker_gray"
+                    android:src="@drawable/ic_baseline_people_alt_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <TextView
+                    android:id="@+id/textNameCollector"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/collectorImg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/collectorImg"
+                    app:layout_constraintBottom_toBottomOf="@id/textPhoneCollector"
+                    android:layout_marginStart="@dimen/common_padding_middle"
+                    android:layout_marginEnd="@dimen/common_padding_middle"
+                    android:maxLines="2"
+                    android:textColor="@color/black"
+                    android:text="@{collector.name}"
+                    android:contentDescription="@{collector.name}"/>
+                <TextView
+                    android:id="@+id/textPhoneCollector"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/collectorImg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/textNameCollector"
+                    app:layout_constraintBottom_toBottomOf="@id/textEmailCollector"
+                    android:layout_marginStart="@dimen/common_padding_middle"
+                    android:layout_marginEnd="@dimen/common_padding_middle"
+                    android:maxLines="2"
+                    android:textColor="@color/black"
+                    android:text="@{collector.telephone}"
+                    android:contentDescription="@{collector.telephone}"/>
+                <TextView
+                    android:id="@+id/textEmailCollector"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/collectorImg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textPhoneCollector"
+                    android:layout_marginStart="@dimen/common_padding_middle"
+                    android:layout_marginEnd="@dimen/common_padding_middle"
+                    android:maxLines="2"
+                    android:textColor="@color/black"
+                    android:text="@{collector.email}"
+                    android:contentDescription="e-mail"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -65,29 +65,34 @@ class NetworkServiceAdapter constructor(context : Context ) {
         )
     }
 
-    fun getAlbum(albumId:Int, onComplete: (resp: List<Album>) -> Unit, onError: (error: VolleyError) -> Unit) {
+    suspend fun getAlbum(albumId:Int) = suspendCoroutine<List<Album>> { cont->
         requestQueue.add(
             requestQueue.add(getRequest("albums/$albumId",
                 { response ->
                     val resp = JSONObject(response)
                     val list = mutableListOf<Album>()
-                    list.add(0, Album(
-                        albumId = resp.getInt("id"),
-                        name = resp.getString("name"),
-                        cover = resp.getString("cover"),
-                        recordLabel = resp.getString("recordLabel"),
-                        releaseDate = resp.getString("releaseDate"),
-                        genre = resp.getString("genre"),
-                        description = resp.getString("description")))
-                    onComplete(list)
+                    list.add(
+                        0,
+                        Album(
+                            albumId = resp.getInt("id"),
+                            name = resp.getString("name"),
+                            cover = resp.getString("cover"),
+                            recordLabel = resp.getString("recordLabel"),
+                            releaseDate = resp.getString("releaseDate"),
+                            genre = resp.getString("genre"),
+                            description = resp.getString("description")
+                        )
+                    )
+                    cont.resume(list)
                 },
                 {
-                    onError(it)
+                    cont.resumeWithException(it)
                 }
             )
             )
         )
     }
+
     suspend fun getCollectors() = suspendCoroutine<List<Collector>> { cont->
         requestQueue.add(
             getRequest("collectors",

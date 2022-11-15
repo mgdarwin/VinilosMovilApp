@@ -50,7 +50,7 @@ class CollectorsAdapter : RecyclerView.Adapter<CollectorsAdapter.CollectorViewHo
         holder.viewDataBinding.also {
             it.collector = collectors[position]
         }
-
+        /*
         holder.viewDataBinding.root.setOnClickListener {
             val action =
                 AlbumFragmentDirections.actionAlbumFragmentToAlbumDetailFragment(collectors[position].collectorId)
@@ -58,6 +58,7 @@ class CollectorsAdapter : RecyclerView.Adapter<CollectorsAdapter.CollectorViewHo
             Log.d("indice", collectors[position].collectorId.toString())
             holder.viewDataBinding.root.findNavController().navigate(action)
         }
+        */
     }
 
     override fun getItemCount(): Int {

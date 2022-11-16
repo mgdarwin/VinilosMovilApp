@@ -16,6 +16,7 @@ class CacheManager (context: Context){
     }
 
     private var albums: HashMap<String, List<Album>> = hashMapOf()
+    private var albumDetail : HashMap<Int, List<Album>> = hashMapOf()
 
     fun addAlbums(albumsToAdd :List<Album>){
         Log.d("cacheManager action","adding albums to cache...")
@@ -30,6 +31,18 @@ class CacheManager (context: Context){
         return if (albums.containsKey("albums")) albums["albums"]!! else listOf()
     }
 
+    fun addAlbum(albumId : Int, album : List<Album>){
+        Log.d("cacheManager action","adding album $albumId to cache...")
+        if (!albumDetail.containsKey(albumId)){
+            Log.d("cacheManager action","Saved Album of ID $albumId to cache")
+            albumDetail[albumId] = album
+        }
+    }
+
+    fun getAlbum(albumId: Int) : List<Album> {
+        Log.d("cacheManager action","retrieving album $albumId from cache")
+        return if (albumDetail.containsKey(albumId)) albumDetail[albumId]!! else listOf()
+    }
 
 
 }

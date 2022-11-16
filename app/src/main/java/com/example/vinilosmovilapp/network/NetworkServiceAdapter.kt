@@ -8,6 +8,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.vinilosmovilapp.models.Album
+import com.example.vinilosmovilapp.models.Artist
 import com.example.vinilosmovilapp.models.Collector
 import org.json.JSONArray
 import org.json.JSONObject
@@ -90,6 +91,27 @@ class NetworkServiceAdapter constructor(context : Context ) {
             )
             )
         )
+    }
+
+    suspend fun getArtists() = suspendCoroutine<List<Artist>> { cont->
+        requestQueue.add(getRequest("musicians",
+            { response ->
+                val resp = JSONArray(response)
+                val list = mutableListOf<Artist>()
+                for (i in 0 until resp.length()) {
+                    val item = resp.getJSONObject(i)
+                    list.add(i, Artist(
+                        artistId = item.getInt("id"),
+                        name = item.getString("name"),
+                        image = item.getString("image"),
+                        description = item.getString("description"),
+                        birthDate = item.getString("birthDate")))
+                }
+                cont.resume(list)
+            },
+            {
+                cont.resumeWithException(it)
+            }))
     }
 
     suspend fun getCollectors() = suspendCoroutine<List<Collector>> { cont->

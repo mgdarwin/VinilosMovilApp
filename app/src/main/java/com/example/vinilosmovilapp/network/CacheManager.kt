@@ -3,6 +3,7 @@ package com.example.vinilosmovilapp.network
 import android.content.Context
 import android.util.Log
 import com.example.vinilosmovilapp.models.Album
+import com.example.vinilosmovilapp.models.Artist
 import com.example.vinilosmovilapp.models.Collector
 
 class CacheManager (context: Context){
@@ -18,6 +19,7 @@ class CacheManager (context: Context){
 
     private var albums: HashMap<String, List<Album>> = hashMapOf()
     private var albumDetail : HashMap<Int, List<Album>> = hashMapOf()
+    private var artists: HashMap<String, List<Artist>> = hashMapOf()
     private var collectors: HashMap<String, List<Collector>> = hashMapOf()
 
     fun addAlbums(albumsToAdd :List<Album>){
@@ -44,6 +46,11 @@ class CacheManager (context: Context){
     fun getAlbum(albumId: Int) : List<Album> {
         Log.d("cacheManager action","retrieving album $albumId from cache")
         return if (albumDetail.containsKey(albumId)) albumDetail[albumId]!! else listOf()
+    }
+
+    fun getArtists() : List<Artist> {
+        Log.d("cacheManager action","retrieving artist from cache")
+        return if (artists.containsKey("artists")) artists["artist"]!! else listOf()
     }
 
     fun addCollectors(collectorsToAdd :List<Collector>){

@@ -48,9 +48,17 @@ class CacheManager (context: Context){
         return if (albumDetail.containsKey(albumId)) albumDetail[albumId]!! else listOf()
     }
 
+    fun addArtists(artistsToAdd :List<Artist>){
+        Log.d("cacheManager action","adding artists to cache...")
+        if (!artists.containsKey("artists")){
+            Log.d("cacheManager action","Saved Artists data to cache")
+            artists["artists"] = artistsToAdd
+        }
+    }
+
     fun getArtists() : List<Artist> {
         Log.d("cacheManager action","retrieving artist from cache")
-        return if (artists.containsKey("artists")) artists["artist"]!! else listOf()
+        return if (artists.containsKey("artists")) artists["artists"]!! else listOf()
     }
 
     fun addCollectors(collectorsToAdd :List<Collector>){

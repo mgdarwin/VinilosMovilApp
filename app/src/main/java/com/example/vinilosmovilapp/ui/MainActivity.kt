@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.ico_artists -> {
                 // navigate to settings screen
+                navController.navigate(R.id.artistFragment)
                 true
             }
             R.id.ico_collectors -> {

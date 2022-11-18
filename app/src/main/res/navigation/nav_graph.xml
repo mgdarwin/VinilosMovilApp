@@ -30,5 +30,11 @@
         android:label="Collectors List"
         tools:layout="@layout/collector_fragment" >
     </fragment>
+    <fragment
+        android:id="@+id/artistFragment"
+        android:name="com.example.vinilosmovilapp.ui.ArtistListFragment"
+        android:label="Artists List"
+        tools:layout="@layout/artist_list_fragment" >
+    </fragment>
 
 </navigation>

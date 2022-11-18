@@ -4,6 +4,7 @@
     <string name="title_artists">Artists</string>
     <string name="title_collectors">Collectors</string>
     <string name="description_img_photo">Album Photo</string>
+    <string name="description_artist_img_photo">Artist Photo</string>
     <string name="txt_no_album_detail">Album without details</string>
     <string name="title_album_details">Album Detail</string>
     <string name="content_description_media">Album Cover Image</string>

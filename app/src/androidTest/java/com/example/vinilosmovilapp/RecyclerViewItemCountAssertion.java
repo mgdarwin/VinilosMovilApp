@@ -3,7 +3,6 @@ package com.example.vinilosmovilapp;
 import static androidx.test.espresso.matcher.ViewMatchers.assertThat;
 
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
-import static org.hamcrest.Matchers.is;
 
 import android.view.View;
 

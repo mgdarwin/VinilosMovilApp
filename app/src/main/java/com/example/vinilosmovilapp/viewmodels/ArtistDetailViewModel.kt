@@ -3,7 +3,6 @@ package com.example.vinilosmovilapp.viewmodels
 import android.app.Application
 import androidx.lifecycle.*
 import com.example.vinilosmovilapp.models.Artist
-import com.example.vinilosmovilapp.network.NetworkServiceAdapter
 import com.example.vinilosmovilapp.repositories.ArtistDetailRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

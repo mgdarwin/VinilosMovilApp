@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable name="artist" type="com.example.vinilosmovilapp.models.Artist"/>
+    </data>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardDetailArtist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        tools:context=".ui.ArtistDetailFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/common_padding_default">
+
+            <ImageView
+                android:id="@+id/artistDetailImage"
+                android:layout_width="match_parent"
+                android:layout_height="350sp"
+                android:contentDescription="@string/content_description_media"
+                android:scaleType="centerCrop"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:elevation="6dp"
+                android:padding="16dp">
+
+                <!-- Title, secondary and supporting text -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{artist.name}"
+                    android:contentDescription="@{artist.name}"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    tools:text="Artist Name"
+                    android:id="@+id/artistTittle"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{`Birthdate | ` + artist.birthDate}"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="@color/black"
+                    tools:text="Birthdate" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@{artist.description}"
+                    android:contentDescription="@{artist.description}"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="@color/black"
+                    tools:text="Description" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

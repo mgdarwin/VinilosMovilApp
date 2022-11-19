@@ -14,6 +14,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.vinilosmovilapp.R
 import com.example.vinilosmovilapp.databinding.ArtistListItemBinding
 import com.example.vinilosmovilapp.models.Artist
+import com.example.vinilosmovilapp.ui.ArtistListFragmentDirections
 
 
 class ArtistAdapter : RecyclerView.Adapter<ArtistAdapter.ArtistViewHolder>(){
@@ -52,16 +53,14 @@ class ArtistAdapter : RecyclerView.Adapter<ArtistAdapter.ArtistViewHolder>(){
         holder.viewDataBinding.also {
             it.artist = artists[position]
         }
-/*
 
         holder.viewDataBinding.root.setOnClickListener {
-            val action = ArtistListFragmentDirections.actionArtistListFragmentToArtistDetailFragment(artists[position].artistId)
+            val action = ArtistListFragmentDirections.actionArtistFragmentToArtistDetailFragment(artists[position].artistId)
             // Navigate using that action
             Log.d("indice", artists[position].artistId.toString())
             holder.viewDataBinding.root.findNavController().navigate(action)
         }
 
-*/
         val artist: Artist = artists.get(position)
         holder.viewDataBinding.also {
             it.artist = artists[position]

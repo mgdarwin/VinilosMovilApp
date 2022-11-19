@@ -114,6 +114,29 @@ class NetworkServiceAdapter constructor(context : Context ) {
             }))
     }
 
+    suspend fun getArtist(artistId:Int) = suspendCoroutine<List<Artist>> { cont ->
+        requestQueue.add(getRequest("musicians/$artistId",
+            { response ->
+                val resp = JSONObject(response)
+                println("********* Respuesta a la peticion de un artista GET ********")
+                println(resp)
+                val list = mutableListOf<Artist>()
+                list.add(0, Artist(
+                    artistId = resp.getInt("id"),
+                    name = resp.getString("name"),
+                    image = resp.getString(
+                        "image"),
+                    description = resp.getString("description"),
+                    birthDate = resp.getString("birthDate")))
+                println("**************** esta es la lista de salida de la peticion GET Artist **************")
+                println(list)
+                cont.resume(list)
+            },
+            {
+                cont.resumeWithException(it)
+            }))
+    }
+
     suspend fun getCollectors() = suspendCoroutine<List<Collector>> { cont->
         requestQueue.add(
             getRequest("collectors",

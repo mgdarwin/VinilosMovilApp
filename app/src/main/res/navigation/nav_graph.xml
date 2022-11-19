@@ -35,6 +35,18 @@
         android:name="com.example.vinilosmovilapp.ui.ArtistListFragment"
         android:label="Artists List"
         tools:layout="@layout/artist_list_fragment" >
+        <action
+            android:id="@+id/action_artistFragment_to_artistDetailFragment"
+            app:destination="@id/artistDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/artistDetailFragment"
+        android:name="com.example.vinilosmovilapp.ui.ArtistDetailFragment"
+        android:label="Artist Detail"
+        tools:layout="@layout/artist_detail_item" >
+        <argument
+            android:name="artistId"
+            app:argType="integer" />
     </fragment>
 
 </navigation>

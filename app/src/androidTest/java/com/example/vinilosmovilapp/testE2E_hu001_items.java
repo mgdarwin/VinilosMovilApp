@@ -13,20 +13,21 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class testE2E_hu001 {
+public class testE2E_hu001_items {
 
     @Rule
     public ActivityScenarioRule<MainActivity> mActivityTestRule = new ActivityScenarioRule<>(MainActivity.class);
 
     @Test
-    public void mainActivityTest() {
+    public void mainActivityTest() throws InterruptedException {
 
         try {
             Thread.sleep(10000);
+
+            onView(withId(R.id.albumsRv)).check(new RecyclerViewItemCountAssertion(1));
         }
         catch (Exception e){
-
+            throw e;
         }
-        onView(withId(R.id.albumsRv)).check(new RecyclerViewItemCountAssertion(3));
     }
 }

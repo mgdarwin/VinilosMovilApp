@@ -4,7 +4,9 @@ import static androidx.test.espresso.matcher.ViewMatchers.assertThat;
 
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.espresso.NoMatchingViewException;
@@ -22,7 +24,6 @@ public class RecyclerViewItemCountAssertion implements ViewAssertion {
         if (noViewFoundException != null) {
             throw noViewFoundException;
         }
-
         RecyclerView recyclerView = (RecyclerView) view;
         RecyclerView.Adapter adapter = recyclerView.getAdapter();
         assertThat(adapter.getItemCount(), greaterThanOrEqualTo(expectedCount));

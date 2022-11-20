@@ -30,25 +30,25 @@ public class testE2E_hu003_nav {
 
             clickMenu(R.id.ico_artists);
 
-            Thread.sleep(1000);
+            Thread.sleep(4000);
 
             onView(withId(R.id.artistsRv)).check(new RecyclerViewItemCountAssertion(1));
 
-            Thread.sleep(1000);
+            Thread.sleep(2000);
 
             clickMenu(R.id.ico_collectors);
             onView(withId(R.id.collectorsRv)).check(new RecyclerViewItemCountAssertion(1));
 
-            Thread.sleep(1000);
+            Thread.sleep(2000);
 
             onView(isRoot()).perform(ViewActions.pressBack());
 
-            Thread.sleep(1000);
+            Thread.sleep(2000);
 
             clickMenu(R.id.ico_albums);
             onView(withId(R.id.albumsRv)).check(new RecyclerViewItemCountAssertion(1));
 
-            Thread.sleep(1000);
+            Thread.sleep(2000);
 
             onView(isRoot()).perform(ViewActions.pressBack());
 

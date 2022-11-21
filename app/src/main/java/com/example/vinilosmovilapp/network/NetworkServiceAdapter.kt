@@ -4,11 +4,12 @@ import android.content.Context
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
-import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.vinilosmovilapp.models.Album
+import com.example.vinilosmovilapp.models.Artist
+import com.example.vinilosmovilapp.models.Collector
 import org.json.JSONArray
 import org.json.JSONObject
 import kotlin.coroutines.resume
@@ -34,7 +35,7 @@ class NetworkServiceAdapter constructor(context : Context ) {
         Volley.newRequestQueue(context.applicationContext)
     }
 
-    fun getAlbums(onComplete: (resp: List<Album>) -> Unit, onError: (error: VolleyError) -> Unit) {
+    suspend fun getAlbums() = suspendCoroutine<List<Album>> { cont->
         requestQueue.add(
             getRequest("albums",
                 { response ->
@@ -55,38 +56,114 @@ class NetworkServiceAdapter constructor(context : Context ) {
                             )
                         )
                     }
-                    onComplete(list)
+                    cont.resume(list)
                 },
                 {
-                    onError(it)
+                    cont.resumeWithException(it)
                 }
             )
         )
     }
 
-    fun getAlbum(albumId:Int, onComplete: (resp: List<Album>) -> Unit, onError: (error: VolleyError) -> Unit) {
+    suspend fun getAlbum(albumId:Int) = suspendCoroutine<List<Album>> { cont->
         requestQueue.add(
             requestQueue.add(getRequest("albums/$albumId",
                 { response ->
                     val resp = JSONObject(response)
                     val list = mutableListOf<Album>()
-                    list.add(0, Album(
-                        albumId = resp.getInt("id"),
-                        name = resp.getString("name"),
-                        cover = resp.getString("cover"),
-                        recordLabel = resp.getString("recordLabel"),
-                        releaseDate = resp.getString("releaseDate"),
-                        genre = resp.getString("genre"),
-                        description = resp.getString("description")))
-                    onComplete(list)
+                    list.add(
+                        0,
+                        Album(
+                            albumId = resp.getInt("id"),
+                            name = resp.getString("name"),
+                            cover = resp.getString("cover"),
+                            recordLabel = resp.getString("recordLabel"),
+                            releaseDate = resp.getString("releaseDate"),
+                            genre = resp.getString("genre"),
+                            description = resp.getString("description")
+                        )
+                    )
+                    cont.resume(list)
                 },
                 {
-                    onError(it)
+                    cont.resumeWithException(it)
                 }
             )
             )
         )
     }
+
+    suspend fun getArtists() = suspendCoroutine<List<Artist>> { cont->
+        requestQueue.add(getRequest("musicians",
+            { response ->
+                val resp = JSONArray(response)
+                val list = mutableListOf<Artist>()
+                for (i in 0 until resp.length()) {
+                    val item = resp.getJSONObject(i)
+                    list.add(i, Artist(
+                        artistId = item.getInt("id"),
+                        name = item.getString("name"),
+                        image = item.getString("image"),
+                        description = item.getString("description"),
+                        birthDate = item.getString("birthDate")))
+                }
+                cont.resume(list)
+            },
+            {
+                cont.resumeWithException(it)
+            }))
+    }
+
+    suspend fun getArtist(artistId:Int) = suspendCoroutine<List<Artist>> { cont ->
+        requestQueue.add(getRequest("musicians/$artistId",
+            { response ->
+                val resp = JSONObject(response)
+                println("********* Respuesta a la peticion de un artista GET ********")
+                println(resp)
+                val list = mutableListOf<Artist>()
+                list.add(0, Artist(
+                    artistId = resp.getInt("id"),
+                    name = resp.getString("name"),
+                    image = resp.getString(
+                        "image"),
+                    description = resp.getString("description"),
+                    birthDate = resp.getString("birthDate")))
+                println("**************** esta es la lista de salida de la peticion GET Artist **************")
+                println(list)
+                cont.resume(list)
+            },
+            {
+                cont.resumeWithException(it)
+            }))
+    }
+
+    suspend fun getCollectors() = suspendCoroutine<List<Collector>> { cont->
+        requestQueue.add(
+            getRequest("collectors",
+                { response ->
+                    val resp = JSONArray(response)
+                    val list = mutableListOf<Collector>()
+                    for (i in 0 until resp.length()) {
+                        val item = resp.getJSONObject(i)
+                        list.add(
+                            i,
+                            Collector(
+                                collectorId = item.getInt("id"),
+                                name = item.getString("name"),
+                                telephone = item.getString("telephone"),
+                                email = item.getString("email")
+                            )
+                        )
+                    }
+                    cont.resume(list)
+                 },
+                {
+                    cont.resumeWithException(it)
+                }
+            )
+        )
+    }
+
 
     private fun getRequest(
         path: String,

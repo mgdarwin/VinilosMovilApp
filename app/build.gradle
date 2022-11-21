@@ -2,8 +2,10 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'androidx.navigation.safeargs.kotlin'
-
 }
+
+apply plugin: "kotlinx-serialization"
+apply plugin: 'kotlin-kapt'
 
 android {
     namespace 'com.example.vinilosmovilapp'
@@ -75,5 +77,12 @@ dependencies {
 
     //Coroutines support
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
+
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2"
+
+    //Room support
+    implementation "androidx.room:room-ktx:$rootProject.roomVersion"
+    kapt "androidx.room:room-compiler:$rootProject.roomVersion"
+    androidTestImplementation "androidx.room:room-testing:$rootProject.roomVersion"
 
 }

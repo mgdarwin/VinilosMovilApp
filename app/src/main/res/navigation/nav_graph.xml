@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/albumFragment"
         android:name="com.example.vinilosmovilapp.ui.AlbumFragment"
-        android:label="Albums List"
+        android:label="Album List"
         tools:layout="@layout/album_fragment" >
         <action
             android:id="@+id/action_albumFragment_to_albumDetailFragment"

@@ -21,6 +21,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:strokeColor="@color/stroke_color"
+            android:background="@color/white"
             app:strokeWidth="1dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,6 +29,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 tools:ignore="ExtraText"
+                android:background="@color/white"
                 android:id="@+id/constraint_artists">
 
                 <ImageView

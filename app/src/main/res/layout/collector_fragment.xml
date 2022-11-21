@@ -6,6 +6,7 @@
     tools:context=".ui.CollectorFragment"
     android:layout_marginStart="16dp"
     android:layout_marginEnd="16dp"
+    android:background="@color/white"
     android:textColor="@color/black">
 
 

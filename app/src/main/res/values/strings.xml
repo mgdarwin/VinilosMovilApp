@@ -1,7 +1,12 @@
 <resources>
     <string name="app_name">Vinils_Mobile</string>
     <string name="title_albums">Albums</string>
+    <string name="title_artists">Artists</string>
+    <string name="title_collectors">Collectors</string>
     <string name="description_img_photo">Album Photo</string>
+    <string name="description_artist_img_photo">Artist Photo</string>
+    <string name="txt_no_artist_detail">Artist without Detail</string>
+    <string name="title_artist_detail">Artist Detail</string>
     <string name="txt_no_album_detail">Album without details</string>
     <string name="title_album_details">Album Detail</string>
     <string name="content_description_media">Album Cover Image</string>
@@ -9,6 +14,8 @@
     <string name="album_name_placeholder">Album Name</string>
     <string name="title_album_detail">Album Detail</string>
     <string name="icon_layout">Icon</string>
+
+
 
     <string name="default_text">Haga clic en el botón para cargar información</string>
     <string name="post_text">Haga clic en el botón para crear un dato</string>

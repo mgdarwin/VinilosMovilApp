@@ -18,7 +18,8 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        android:color="@color/teal_200"
+        app:popupTheme="@style/ThemeOverlay.AppCompat">
    </androidx.appcompat.widget.Toolbar>
 
     <androidx.fragment.app.FragmentContainerView

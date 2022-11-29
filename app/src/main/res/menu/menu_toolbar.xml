@@ -20,8 +20,16 @@
         android:visible="true"
         app:showAsAction="never|withText">
     </item>
+    <item
+        android:id="@+id/ico_addItem"
+        android:title="@string/icon_addItem"
+        android:icon="@drawable/baseline_data_saver_on_white_48"
+        app:showAsAction="always">
+    </item>
+
 
     <!--
+    android:visible="true"
     <item android:id="@+id/action_switch_layout"
         android:title="@string/action_switch_layout"
         app:showAsAction="always" />

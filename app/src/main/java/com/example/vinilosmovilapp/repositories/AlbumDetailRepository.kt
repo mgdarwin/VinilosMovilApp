@@ -3,6 +3,7 @@ package com.example.vinilosmovilapp.repositories
 import android.app.Application
 import android.util.Log
 import com.example.vinilosmovilapp.models.Album
+import com.example.vinilosmovilapp.models.Track
 import com.example.vinilosmovilapp.network.CacheManager
 import com.example.vinilosmovilapp.network.NetworkServiceAdapter
 
@@ -22,5 +23,10 @@ class AlbumDetailRepository (val application: Application) {
         }
 
     }
+
+    suspend fun addTrackToAlbum(track: Track, album:Album) {
+        NetworkServiceAdapter.getInstance(application).addTrackToAlbum(track, album)
+    }
+
 
 }

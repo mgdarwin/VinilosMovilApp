@@ -1,6 +1,7 @@
 package com.example.vinilosmovilapp.viewmodels
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.vinilosmovilapp.models.Album
 import com.example.vinilosmovilapp.network.NetworkServiceAdapter
@@ -45,6 +46,22 @@ class AlbumDetailViewModel(application: Application, albumId: Int) :  AndroidVie
             }
         }
         catch (e:Exception){
+            _eventNetworkError.value = true
+        }
+    }
+
+    fun getAlbumDetail(albumId: Int) {
+        try {
+            viewModelScope.launch (Dispatchers.Default) {
+                withContext(Dispatchers.IO) {
+                    var albums = albumDetailRepository.refreshData(albumId)
+                    if (albums != null) {
+                        _albums.postValue(albums)
+                    }
+                }
+            }
+        } catch (e: java.lang.Exception) {
+            Log.d("Error", e.toString())
             _eventNetworkError.value = true
         }
     }

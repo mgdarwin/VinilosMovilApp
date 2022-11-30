@@ -7,10 +7,10 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.vinilosmovilapp.models.Album
 import com.example.vinilosmovilapp.models.Artist
 import com.example.vinilosmovilapp.models.Collector
 import com.example.vinilosmovilapp.models.Track
+import com.example.vinilosmovilapp.models.Album
 import org.json.JSONArray
 import org.json.JSONObject
 import kotlin.coroutines.resume
@@ -42,56 +42,81 @@ class NetworkServiceAdapter constructor(context: Context) {
             getRequest("albums",
                 { response ->
                     val resp = JSONArray(response)
-                    val list = mutableListOf<Album>()
+                    val albums = mutableListOf<Album>()
+
+                    var albumObject: JSONObject?
+
+                    var trackObject: JSONObject?
+                    var tracksArray: JSONArray?
+                    var track: Track?
+
                     for (i in 0 until resp.length()) {
-                        val item = resp.getJSONObject(i)
-                        list.add(
-                            i,
-                            Album(
-                                albumId = item.getInt("id"),
-                                name = item.getString("name"),
-                                cover = item.getString("cover"),
-                                recordLabel = item.getString("recordLabel"),
-                                releaseDate = item.getString("releaseDate"),
-                                genre = item.getString("genre"),
-                                description = item.getString("description")
+                        val tracks = mutableListOf<Track>()
+                        albumObject = resp.getJSONObject(i)
+                        tracksArray = albumObject.getJSONArray("tracks")
+
+                        for (j in 0 until tracksArray.length()) {
+                            trackObject = tracksArray.getJSONObject(j)
+                            track = Track(
+                                name = trackObject.getString("name"),
+                                duration = trackObject.getString("duration")
+                            )
+                            tracks.add(j, track)
+                        }
+
+                        albums.add(
+                            i, Album(
+                                albumId = albumObject.getInt("id"),
+                                name = albumObject.getString("name"),
+                                cover = albumObject.getString("cover"),
+                                recordLabel = albumObject.getString("recordLabel"),
+                                releaseDate = albumObject.getString("releaseDate"),
+                                genre = albumObject.getString("genre"),
+                                description = albumObject.getString("description"),
+                                tracks = tracks
                             )
                         )
                     }
-                    cont.resume(list)
+                    cont.resume(albums)
                 },
                 {
                     cont.resumeWithException(it)
-                }
-            )
+                })
         )
     }
 
-    suspend fun getAlbum(albumId: Int) = suspendCoroutine<List<Album>> { cont ->
+    suspend fun getAlbum(albumId: Int) = suspendCoroutine<Album> { cont ->
         requestQueue.add(
-            requestQueue.add(getRequest("albums/$albumId",
+            getRequest("albums/$albumId",
                 { response ->
-                    val resp = JSONObject(response)
-                    val list = mutableListOf<Album>()
-                    list.add(
-                        0,
-                        Album(
-                            albumId = resp.getInt("id"),
-                            name = resp.getString("name"),
-                            cover = resp.getString("cover"),
-                            recordLabel = resp.getString("recordLabel"),
-                            releaseDate = resp.getString("releaseDate"),
-                            genre = resp.getString("genre"),
-                            description = resp.getString("description")
+                    val albumObject = JSONObject(response)
+                    val tracks = mutableListOf<Track>()
+                    val tracksArray = albumObject.getJSONArray("tracks")
+                    for (i in 0 until tracksArray.length()) {
+                        val track = tracksArray.getJSONObject(i)
+                        tracks.add(
+                            Track(
+                                name = track.getString("name"),
+                                duration = track.getString("duration")
+                            )
                         )
+                    }
+
+                    val album = Album(
+                        albumId = albumObject.getInt("id"),
+                        name = albumObject.getString("name"),
+                        cover = albumObject.getString("cover"),
+                        recordLabel = albumObject.getString("recordLabel"),
+                        releaseDate = albumObject.getString("releaseDate"),
+                        genre = albumObject.getString("genre"),
+                        description = albumObject.getString("description"),
+                        tracks = tracks
                     )
-                    cont.resume(list)
+                    cont.resume(album)
                 },
                 {
                     cont.resumeWithException(it)
-                }
-            )
-            )
+                })
         )
     }
 

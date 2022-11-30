@@ -5,11 +5,10 @@ import androidx.room.PrimaryKey
 import kotlinx.serialization.Serializable
 
 @Serializable
-@Entity (tableName = "comments_table")
 data class Comment(
-    val description:String,
-    val rating:String,
-    val albumId:Int,
+    val description: String,
+    val rating: String,
+    val albumId: Int,
     @PrimaryKey(autoGenerate = true)
-    val commentId:Int = 0
+    val commentId: Int = 0
 )

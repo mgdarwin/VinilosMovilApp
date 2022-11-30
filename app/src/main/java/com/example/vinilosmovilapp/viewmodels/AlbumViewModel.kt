@@ -2,16 +2,15 @@ package com.example.vinilosmovilapp.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.example.vinilosmovilapp.database.VinylRoomDatabase
-import com.example.vinilosmovilapp.models.Album
 import com.example.vinilosmovilapp.repositories.AlbumListRepository
+import com.example.vinilosmovilapp.models.Album
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class AlbumViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val albumsRepository = AlbumListRepository(application, VinylRoomDatabase.getDatabase(application.applicationContext).albumsDao())
+    private val albumsRepository = AlbumListRepository(application)
     private val _albums = MutableLiveData<List<Album>>()
 
     val albums: LiveData<List<Album>>
@@ -33,16 +32,15 @@ class AlbumViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun refreshDataFromNetwork() {
         try {
-            viewModelScope.launch(Dispatchers.Default){
-                withContext(Dispatchers.IO){
+            viewModelScope.launch(Dispatchers.Default) {
+                withContext(Dispatchers.IO) {
                     var data = albumsRepository.refreshData()
                     _albums.postValue(data)
                 }
                 _eventNetworkError.postValue(false)
                 _isNetworkErrorShown.postValue(false)
             }
-        }
-        catch (e:Exception){
+        } catch (e: Exception) {
             _eventNetworkError.value = true
         }
     }

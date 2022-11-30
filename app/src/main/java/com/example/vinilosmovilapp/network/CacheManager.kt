@@ -2,9 +2,9 @@ package com.example.vinilosmovilapp.network
 
 import android.content.Context
 import android.util.Log
-import com.example.vinilosmovilapp.models.Album
 import com.example.vinilosmovilapp.models.Artist
 import com.example.vinilosmovilapp.models.Collector
+import com.example.vinilosmovilapp.models.Album
 
 class CacheManager (context: Context){
     companion object{
@@ -36,11 +36,11 @@ class CacheManager (context: Context){
         return if (albums.containsKey("albums")) albums["albums"]!! else listOf()
     }
 
-    fun addAlbum(albumId : Int, album : List<Album>){
+    fun addAlbum(albumId : Int, album : Album){
         Log.d("cacheManager action","adding album $albumId to cache...")
         if (!albumDetail.containsKey(albumId)){
             Log.d("cacheManager action","Saved Album of ID $albumId to cache")
-            albumDetail[albumId] = album
+            albumDetail[albumId] = listOf(album)
         }
     }
 

@@ -3,9 +3,8 @@ package com.example.vinilosmovilapp.viewmodels
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
-import com.example.vinilosmovilapp.models.Album
-import com.example.vinilosmovilapp.network.NetworkServiceAdapter
 import com.example.vinilosmovilapp.repositories.AlbumDetailRepository
+import com.example.vinilosmovilapp.models.Album
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

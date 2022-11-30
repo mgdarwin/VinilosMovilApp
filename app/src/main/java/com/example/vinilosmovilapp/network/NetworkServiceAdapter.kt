@@ -152,7 +152,10 @@ class NetworkServiceAdapter constructor(context : Context ) {
                                 collectorId = item.getInt("id"),
                                 name = item.getString("name"),
                                 telephone = item.getString("telephone"),
-                                email = item.getString("email")
+                                email = item.getString("email"),
+                                comments = item.getJSONArray("comments"),
+                                favoritePerformers = item.getJSONArray("favoritePerformers"),
+                                collectorAlbums = item.getJSONArray("collectorAlbums")
                             )
                         )
                     }

@@ -10,8 +10,9 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinilosmovilapp.R
 import com.example.vinilosmovilapp.databinding.CollectorItemBinding
+import com.example.vinilosmovilapp.models.Album
 import com.example.vinilosmovilapp.models.Collector
-import com.example.vinilosmovilapp.ui.AlbumFragmentDirections
+import com.example.vinilosmovilapp.ui.CollectorFragmentDirections
 
 class CollectorsAdapter : RecyclerView.Adapter<CollectorsAdapter.CollectorViewHolder>() {
 
@@ -50,6 +51,19 @@ class CollectorsAdapter : RecyclerView.Adapter<CollectorsAdapter.CollectorViewHo
         holder.viewDataBinding.also {
             it.collector = collectors[position]
         }
+
+        holder.viewDataBinding.root.setOnClickListener {
+            val action = CollectorFragmentDirections.actionCollectorFragmentToCollectorDetailFragment (collectors[position].collectorId)
+            // Navigate using that action
+            Log.d("indice", collectors[position].collectorId.toString())
+            holder.viewDataBinding.root.findNavController().navigate(action)
+        }
+
+        val collector: Collector = collectors.get(position)
+        holder.viewDataBinding.also {
+            it.collector = collectors[position]
+        }
+
         /*
         holder.viewDataBinding.root.setOnClickListener {
             val action =

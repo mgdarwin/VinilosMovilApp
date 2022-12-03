@@ -1,6 +1,7 @@
 package com.example.vinilosmovilapp.network
 
 import android.content.Context
+import android.util.Log
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -22,7 +23,8 @@ class NetworkServiceAdapter constructor(context: Context) {
     companion object {
         //const val BASE_URL= "https://back-vinyls-populated.herokuapp.com/"
         //const val BASE_URL = "https://vynils-back-heroku.herokuapp.com/"
-        const val BASE_URL = "https://vynils-back-uniandes.herokuapp.com/"  //Equipo
+        //const val BASE_URL = "https://vynils-back-uniandes.herokuapp.com/"  //Equipo
+        const val  BASE_URL = "https://backvinyls.onrender.com/"
         var instance: NetworkServiceAdapter? = null
         fun getInstance(context: Context) =
             instance ?: synchronized(this) {
@@ -113,6 +115,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                         tracks = tracks
                     )
                     cont.resume(album)
+                    Log.d("NetworkSA tarea>>>", "$album")
                 },
                 {
                     cont.resumeWithException(it)

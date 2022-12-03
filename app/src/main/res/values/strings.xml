@@ -20,6 +20,7 @@
     <string name="text_add_new_track">Add new track to album</string>
     <string name="text_info_data_new_track">Enter the following data to add a new track</string>
     <string name="button_text_save">Save</string>
+    <string name="text_album_tracks">Album Tracks</string>
 
     <string name="default_text">Haga clic en el botón para cargar información</string>
     <string name="post_text">Haga clic en el botón para crear un dato</string>

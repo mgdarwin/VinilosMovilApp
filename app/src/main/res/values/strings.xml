@@ -13,6 +13,7 @@
     <string name="album_description_placeholder">Album description</string>
     <string name="album_name_placeholder">Album Name</string>
     <string name="title_album_detail">Album Detail</string>
+    <string name="title_fragment_album_add">Add a new album</string>
     <string name="icon_layout">Icon</string>
 
 

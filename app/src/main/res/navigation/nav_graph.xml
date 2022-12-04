@@ -48,5 +48,11 @@
             android:name="artistId"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/albumAddFragment"
+        android:name="com.example.vinilosmovilapp.ui.AlbumAddFragment"
+        android:label="@string/title_fragment_album_add"
+        tools:layout="@layout/album_add_fragment">
+    </fragment>
 
 </navigation>

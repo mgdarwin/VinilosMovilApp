@@ -4,16 +4,15 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.example.vinilosmovilapp.database.dao.AlbumsDao
 import com.example.vinilosmovilapp.database.dao.ArtistsDao
 import com.example.vinilosmovilapp.database.dao.CollectorsDao
 import com.example.vinilosmovilapp.database.dao.CommentsDao
-import com.example.vinilosmovilapp.models.Album
-import com.example.vinilosmovilapp.models.Artist
-import com.example.vinilosmovilapp.models.Collector
-import com.example.vinilosmovilapp.models.Comment
+import com.example.vinilosmovilapp.models.*
 
-@Database(entities = [Album::class, Artist::class, Collector::class, Comment::class], version = 1, exportSchema = false)
+@Database(entities = [Album::class, Artist::class, Collector::class, Comment::class], version = 2, exportSchema = false)
+@TypeConverters(DataConvert::class)
 abstract class VinylRoomDatabase : RoomDatabase() {
     abstract fun albumsDao(): AlbumsDao
     abstract fun collectorsDao(): CollectorsDao
@@ -32,7 +31,7 @@ abstract class VinylRoomDatabase : RoomDatabase() {
                     context.applicationContext,
                     VinylRoomDatabase::class.java,
                     "vinyls_database"
-                ).build()
+                ).fallbackToDestructiveMigration().build()
                 INSTANCE = instance
                 // return instance
                 instance

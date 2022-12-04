@@ -66,6 +66,102 @@
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="@color/black"
                     tools:text="Record label" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:elevation="6dp"
+                android:padding="16dp">
+
+                <!-- Title, secondary and supporting text -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Comentarios"
+                    android:contentDescription="Comentarios"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    tools:text="Comment Tittle"
+                    android:id="@+id/collectorCommentTittle"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{`Comentarios | ` + collector.comments[0].description}"
+                    android:contentDescription="@{`Comentarios | ` + collector.comments[0].description}"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="@color/black"
+                    tools:text="Record label" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{`Rating | ` + collector.comments[0].rating}"
+                    android:contentDescription="@{`Rating | ` + collector.comments[0].rating}"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="@color/black"
+                    tools:text="Record label" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:elevation="6dp"
+                android:padding="16dp">
+
+                <!-- Title, secondary and supporting text -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Artistas"
+                    android:contentDescription="Artistas"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    tools:text="Artist Tittle"
+                    android:id="@+id/collectorArtistTittle"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{`Comentarios | ` + collector.favoritePerformers[0].name}"
+                    android:contentDescription="@{`Comentarios | ` + collector.favoritePerformers[0].name}"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="@color/black"
+                    tools:text="Record label" />
+
+                <ImageView
+                    android:id="@+id/collectorArtistDetailCover"
+                    android:layout_width="match_parent"
+                    android:layout_height="350sp"
+                    android:contentDescription="@string/content_description_media"
+                    android:scaleType="centerCrop" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{`Rating | ` + collector.favoritePerformers[0].description}"
+                    android:contentDescription="@{`Rating | ` + collector.favoritePerformers[0].description}"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="@color/black"
+                    tools:text="Record label" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{`Rating | ` + collector.favoritePerformers[0].creationDate}"
+                    android:contentDescription="@{`Rating | ` + collector.favoritePerformers[0].creationDate}"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="@color/black"
+                    tools:text="Record label" />
 
             </LinearLayout>
         </LinearLayout>

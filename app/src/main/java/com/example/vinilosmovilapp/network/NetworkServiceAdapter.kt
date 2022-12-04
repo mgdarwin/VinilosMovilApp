@@ -10,6 +10,7 @@ import com.android.volley.toolbox.Volley
 import com.example.vinilosmovilapp.models.Album
 import com.example.vinilosmovilapp.models.Artist
 import com.example.vinilosmovilapp.models.Collector
+import com.example.vinilosmovilapp.models.Comment
 import org.json.JSONArray
 import org.json.JSONObject
 import kotlin.coroutines.resume
@@ -21,7 +22,7 @@ class NetworkServiceAdapter constructor(context : Context ) {
     companion object {
         //const val BASE_URL= "https://back-vinyls-populated.herokuapp.com/"
         //const val BASE_URL = "https://vynils-back-heroku.herokuapp.com/"
-        const val BASE_URL = "https://vynils-back-uniandes.herokuapp.com/"  //Equipo
+        const val BASE_URL = "https://backvinyls.onrender.com/"  //Equipo
         var instance: NetworkServiceAdapter? = null
         fun getInstance(context: Context) =
             instance ?: synchronized(this) {
@@ -144,8 +145,43 @@ class NetworkServiceAdapter constructor(context : Context ) {
                 { response ->
                     val resp = JSONArray(response)
                     val list = mutableListOf<Collector>()
+                    val list2 = mutableListOf<Comment>()
+                    val list3 = mutableListOf<Artist>()
+
                     for (i in 0 until resp.length()) {
                         val item = resp.getJSONObject(i)
+                        val resp2 = item.getJSONArray("comments")
+
+                        for (j in 0 until resp2.length()){
+                            val item2 = resp2.getJSONObject(j)
+
+                            list2.add(
+                                j,
+                                Comment(
+                                    description = item2.getString("description"),
+                                    rating = item2.getString("rating"),
+                                    albumId = item2.getInt("id")
+                                )
+                            )
+                        }
+
+                        val resp3 = item.getJSONArray("favoritePerformers")
+
+                        for (k in 0 until resp3.length()){
+                            val item3 = resp3.getJSONObject(k)
+
+                            list3.add(
+                                k,
+                                Artist(
+                                    artistId = item3.getInt("artistId"),
+                                    name = item3.getString("name"),
+                                    image = item3.getString("image"),
+                                    description = item3.getString("description"),
+                                    birthDate = item3.getString("creationDate")
+                                )
+                            )
+                        }
+
                         list.add(
                             i,
                             Collector(
@@ -153,9 +189,8 @@ class NetworkServiceAdapter constructor(context : Context ) {
                                 name = item.getString("name"),
                                 telephone = item.getString("telephone"),
                                 email = item.getString("email"),
-                                comments = item.getJSONArray("comments"),
-                                favoritePerformers = item.getJSONArray("favoritePerformers"),
-                                collectorAlbums = item.getJSONArray("collectorAlbums")
+                                comments = list2,
+                                favoritePerformers = list3
                             )
                         )
                     }
@@ -175,14 +210,49 @@ class NetworkServiceAdapter constructor(context : Context ) {
                 println("********* Respuesta a la peticion de un artista GET ********")
                 println(resp)
                 val list = mutableListOf<Collector>()
+                val list2 = mutableListOf<Comment>()
+                val list3 = mutableListOf<Artist>()
+
+                val resp2 = resp.getJSONArray("comments")
+
+                for (j in 0 until resp2.length()){
+                    val item2 = resp2.getJSONObject(j)
+
+                    list2.add(
+                        j,
+                        Comment(
+                            description = item2.getString("description"),
+                            rating = item2.getString("rating"),
+                            albumId = item2.getInt("id")
+                        )
+                    )
+                }
+
+                val resp3 = resp.getJSONArray("favoritePerformers")
+
+                for (k in 0 until resp3.length()){
+                    val item3 = resp3.getJSONObject(k)
+
+                    list3.add(
+                        k,
+                        Artist(
+                            artistId = item3.getInt("artistId"),
+                            name = item3.getString("name"),
+                            image = item3.getString("image"),
+                            description = item3.getString("description"),
+                            birthDate = item3.getString("creationDate")
+                        )
+                    )
+                }
+
                 list.add(0, Collector(
                     collectorId = resp.getInt("id"),
                     name = resp.getString("name"),
                     telephone = resp.getString("telephone"),
                     email = resp.getString("email"),
-                    comments = resp.getJSONArray("comments"),
-                    favoritePerformers = resp.getJSONArray("favoritePerformers"),
-                    collectorAlbums = resp.getJSONArray("collectorAlbums")))
+                    comments = list2,
+                    favoritePerformers = list3
+                ))
                 println("**************** esta es la lista de salida de la peticion GET Artist **************")
                 println(list)
                 cont.resume(list)

@@ -11,7 +11,6 @@ data class Collector(
     val name:String,
     val telephone:String,
     val email:String,
-    @Embedded val comments: JSONArray,
-    @Embedded val favoritePerformers:JSONArray,
-    @Embedded val collectorAlbums:JSONArray
+    val comments: List<Comment>,
+    val favoritePerformers: List<Artist>
 )

@@ -30,7 +30,7 @@ import android.widget.TextView;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class testE2E_hu004_tittle {
+public class testE2E_hu006_tittle {
 
     @Rule
     public ActivityScenarioRule<MainActivity> mActivityTestRule = new ActivityScenarioRule<>(MainActivity.class);
@@ -41,57 +41,48 @@ public class testE2E_hu004_tittle {
         try {
             Thread.sleep(10000);
 
-            clickMenu(R.id.ico_artists);
+            clickMenu(R.id.ico_collectors);
 
             Thread.sleep(1000);
 
-            onView(withId(R.id.artistsRv)).check(new RecyclerViewItemCountAssertion(1));
+            onView(withId(R.id.collectorsRv)).check(new RecyclerViewItemCountAssertion(1));
 
             final String[] title = {"",""};
-            final int[] total = {0};
-            onView(withId(R.id.artistsRv)).check(new ViewAssertion() {
-                @Override
-                public void check(View view, NoMatchingViewException noViewFoundException) {
-                    if (noViewFoundException != null) {
-                        throw noViewFoundException;
-                    }
-                    RecyclerView recyclerView = (RecyclerView) view;
-                    RecyclerView.Adapter adapter = recyclerView.getAdapter();
-                    total[0] = adapter.getItemCount();
+            onView(withId(R.id.collectorsRv)).check(new ViewAssertion() {
+                 @Override
+                 public void check(View view, NoMatchingViewException noViewFoundException) {
+                     if (noViewFoundException != null) {
+                         throw noViewFoundException;
+                     }
+                     RecyclerView recyclerView = (RecyclerView) view;
+                     title[0] = ((TextView) recyclerView.findViewHolderForAdapterPosition(0).
+                             itemView.findViewById(R.id.textNameCollector)).getText().toString();
 
-                    title[0] = ((TextView) recyclerView.findViewHolderForAdapterPosition(0).
-                            itemView.findViewById(R.id.artistName)).getText().toString();
-
-                    if(total[0] > 1) {
-                        title[1] = ((TextView) recyclerView.findViewHolderForAdapterPosition(1).
-                                itemView.findViewById(R.id.artistName)).getText().toString();
-                    }
-                }
-            }
+                     title[1] = ((TextView) recyclerView.findViewHolderForAdapterPosition(1).
+                             itemView.findViewById(R.id.textNameCollector)).getText().toString();
+                 }
+             }
             );
-            onView(allOf(withId(R.id.artistsRv), isDisplayed()))
+            onView(allOf(withId(R.id.collectorsRv), isDisplayed()))
                     .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
             Thread.sleep(5000);
 
-            ViewInteraction tittle = onView(allOf(withId(R.id.artistTittle), withText(title[0]),isDisplayed()));
+            ViewInteraction tittle = onView(allOf(withId(R.id.collectorTittle), withText(title[0]),isDisplayed()));
             tittle.perform(click());
 
             Thread.sleep(5000);
 
-            if(total[0] > 1) {
+            onView(isRoot()).perform(ViewActions.pressBack());
+            onView(allOf(withId(R.id.collectorsRv), isDisplayed()))
+                    .perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
 
-                onView(isRoot()).perform(ViewActions.pressBack());
-                onView(allOf(withId(R.id.artistsRv), isDisplayed()))
-                        .perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
+            Thread.sleep(5000);
 
-                Thread.sleep(5000);
+            ViewInteraction tittle2 = onView(allOf(withId(R.id.collectorTittle), withText(title[1]),isDisplayed()));
+            tittle2.perform(click());
 
-                ViewInteraction tittle2 = onView(allOf(withId(R.id.artistTittle), withText(title[1]), isDisplayed()));
-                tittle2.perform(click());
-
-                Thread.sleep(5000);
-            }
+            Thread.sleep(5000);
 
             onView(isRoot()).perform(ViewActions.pressBack());
 

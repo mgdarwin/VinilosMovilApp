@@ -8,7 +8,9 @@
     <string name="txt_no_artist_detail">Artist without Detail</string>
     <string name="title_artist_detail">Artist Detail</string>
     <string name="txt_no_album_detail">Album without details</string>
+    <string name="txt_no_collector_detail">Collector without details</string>
     <string name="title_album_details">Album Detail</string>
+    <string name="title_collector_details">Collector Detail</string>
     <string name="content_description_media">Album Cover Image</string>
     <string name="album_description_placeholder">Album description</string>
     <string name="album_name_placeholder">Album Name</string>

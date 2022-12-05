@@ -6,7 +6,6 @@ import android.net.ConnectivityManager
 import android.util.Log
 import com.example.vinilosmovilapp.database.dao.CollectorsDao
 import com.example.vinilosmovilapp.models.Collector
-import com.example.vinilosmovilapp.network.CacheManager
 import com.example.vinilosmovilapp.network.NetworkServiceAdapter
 
 class CollectorListRepository (val application: Application, private val collectorsDao: CollectorsDao){

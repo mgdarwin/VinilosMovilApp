@@ -29,6 +29,9 @@
         android:name="com.example.vinilosmovilapp.ui.CollectorFragment"
         android:label="Collectors List"
         tools:layout="@layout/collector_fragment" >
+        <action
+            android:id="@+id/action_collectorFragment_to_collectorDetailFragment"
+            app:destination="@id/collectorDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/artistFragment"
@@ -46,6 +49,15 @@
         tools:layout="@layout/artist_detail_item" >
         <argument
             android:name="artistId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/collectorDetailFragment"
+        android:name="com.example.vinilosmovilapp.ui.CollectorDetailFragment"
+        android:label="Collector Detail"
+        tools:layout="@layout/collector_detail_fragment">
+        <argument
+            android:name="collectorId"
             app:argType="integer" />
     </fragment>
 

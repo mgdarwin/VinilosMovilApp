@@ -40,7 +40,7 @@ Puede realizar la instalacion y ejecucion con 2 metodos:
    `git clone https://github.com/mgdarwin/VinilosMovilApp.git`  
   Correr utilizando android studio  
   
-2. Descargue el apk que se encuentra en la seccion de Sprint 2 en la wiki e instalelo en su dispositivo android.   
+2. Descargue el apk que se encuentra en la seccion de Sprint 3 en la wiki e instalelo en su dispositivo android.   
   
 ### Pruebas  
   

@@ -173,11 +173,11 @@ class NetworkServiceAdapter constructor(context : Context ) {
                             list3.add(
                                 k,
                                 Artist(
-                                    artistId = item3.getInt("artistId"),
+                                    artistId = item3.getInt("id"),
                                     name = item3.getString("name"),
                                     image = item3.getString("image"),
                                     description = item3.getString("description"),
-                                    birthDate = item3.getString("creationDate")
+                                    birthDate = ""
                                 )
                             )
                         }
@@ -236,11 +236,11 @@ class NetworkServiceAdapter constructor(context : Context ) {
                     list3.add(
                         k,
                         Artist(
-                            artistId = item3.getInt("artistId"),
+                            artistId = item3.getInt("id"),
                             name = item3.getString("name"),
                             image = item3.getString("image"),
                             description = item3.getString("description"),
-                            birthDate = item3.getString("creationDate")
+                            birthDate = ""
                         )
                     )
                 }

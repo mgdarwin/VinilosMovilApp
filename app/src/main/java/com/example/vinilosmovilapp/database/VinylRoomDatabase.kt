@@ -11,7 +11,7 @@ import com.example.vinilosmovilapp.database.dao.CollectorsDao
 import com.example.vinilosmovilapp.database.dao.CommentsDao
 import com.example.vinilosmovilapp.models.*
 
-@Database(entities = [Album::class, Artist::class, Collector::class, Comment::class], version = 2, exportSchema = false)
+@Database(entities = [Album::class, Artist::class, Collector::class, Comment::class], version = 3, exportSchema = false)
 @TypeConverters(DataConvert::class)
 abstract class VinylRoomDatabase : RoomDatabase() {
     abstract fun albumsDao(): AlbumsDao

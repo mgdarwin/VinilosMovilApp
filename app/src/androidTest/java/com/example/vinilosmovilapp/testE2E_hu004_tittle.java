@@ -48,6 +48,7 @@ public class testE2E_hu004_tittle {
             onView(withId(R.id.artistsRv)).check(new RecyclerViewItemCountAssertion(1));
 
             final String[] title = {"",""};
+            final int[] total = {0};
             onView(withId(R.id.artistsRv)).check(new ViewAssertion() {
                 @Override
                 public void check(View view, NoMatchingViewException noViewFoundException) {
@@ -55,11 +56,16 @@ public class testE2E_hu004_tittle {
                         throw noViewFoundException;
                     }
                     RecyclerView recyclerView = (RecyclerView) view;
+                    RecyclerView.Adapter adapter = recyclerView.getAdapter();
+                    total[0] = adapter.getItemCount();
+
                     title[0] = ((TextView) recyclerView.findViewHolderForAdapterPosition(0).
                             itemView.findViewById(R.id.artistName)).getText().toString();
 
-                    title[1] = ((TextView) recyclerView.findViewHolderForAdapterPosition(1).
-                            itemView.findViewById(R.id.artistName)).getText().toString();
+                    if(total[0] > 1) {
+                        title[1] = ((TextView) recyclerView.findViewHolderForAdapterPosition(1).
+                                itemView.findViewById(R.id.artistName)).getText().toString();
+                    }
                 }
             }
             );
@@ -73,16 +79,19 @@ public class testE2E_hu004_tittle {
 
             Thread.sleep(5000);
 
-            onView(isRoot()).perform(ViewActions.pressBack());
-            onView(allOf(withId(R.id.artistsRv), isDisplayed()))
-                    .perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
+            if(total[0] > 1) {
 
-            Thread.sleep(5000);
+                onView(isRoot()).perform(ViewActions.pressBack());
+                onView(allOf(withId(R.id.artistsRv), isDisplayed()))
+                        .perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
 
-            ViewInteraction tittle2 = onView(allOf(withId(R.id.artistTittle), withText(title[1]),isDisplayed()));
-            tittle2.perform(click());
+                Thread.sleep(5000);
 
-            Thread.sleep(5000);
+                ViewInteraction tittle2 = onView(allOf(withId(R.id.artistTittle), withText(title[1]), isDisplayed()));
+                tittle2.perform(click());
+
+                Thread.sleep(5000);
+            }
 
             onView(isRoot()).perform(ViewActions.pressBack());
 
